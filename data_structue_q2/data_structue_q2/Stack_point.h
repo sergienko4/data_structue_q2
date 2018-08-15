@@ -1,4 +1,4 @@
-typedef double stack_type;
+typedef char stack_type;
 
 typedef struct stack_element
 {

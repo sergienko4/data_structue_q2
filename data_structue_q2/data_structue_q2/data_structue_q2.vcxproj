@@ -74,6 +74,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Program.c" />
+    <ClCompile Include="Stack_point.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Stack_point.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
