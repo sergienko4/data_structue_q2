@@ -24,25 +24,34 @@ void main() {
 }
 
 void EX2() {
+	int x = 0;
+	Polynomial* newP = NULL;
 	Polynomial* p = create_polynomial();
-	add_polynomial(&p, 5, 0);
-	add_polynomial(&p, -1, 2);
-	add_polynomial(&p, 4, 3);
-	add_polynomial(&p, 8, 6);
-	add_polynomial(&p, 2, 3);
-
 	Polynomial* p1 = create_polynomial();
+
+	add_polynomial(&p, 5, 42);
+	add_polynomial(&p, -1, 2);
+	add_polynomial(&p, 1, 100);
+	add_polynomial(&p, 8, 6);
+
 	add_polynomial(&p1, 3, 1);
 	add_polynomial(&p1, 5, 2);
-	add_polynomial(&p1, 4, 3);
+	add_polynomial(&p1, -4, 3);
 	add_polynomial(&p1, 1, 5);
 	add_polynomial(&p1, -2, 6);
 	add_polynomial(&p1, 7, 8);
 
 
+	print_polynomial(p);
 
 
-
+	newP = plus_polynomial(p, p1);
+	newP = minus_polynomial(p, p1);
+	newP = multyplay_polynomial(p, 0);
+	newP = create_polynomial();
+	x = get_Power_polynomial(newP);
+	reset_power_polynomial(p);
+	
 }
 void EX1() {
 	stack* s1;
