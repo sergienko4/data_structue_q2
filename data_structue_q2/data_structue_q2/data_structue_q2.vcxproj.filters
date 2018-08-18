@@ -21,9 +21,15 @@
     <ClCompile Include="Stack_point.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Polynomial.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Stack_point.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Polynomial.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

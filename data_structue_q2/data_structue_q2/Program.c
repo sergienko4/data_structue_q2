@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "Stack_point.h"
+#include "Polynomial.h"
+
 static int ASCIICode = 90;
-void initStack(stack** st);
 int isNumOrOperator(char c);
 char getChar();
 int preoretyId(char c);
@@ -11,16 +12,43 @@ void calculate(stack* s1, stack* s2, char c);
 char todo(stack* s1, stack* s2);
 
 void EX1();
+void EX2();
 void main() {
-	
-	EX1();
+
+	//EX1();
+	EX2();
+
+
+
+
 }
 
+void EX2() {
+	Polynomial* p = create_polynomial();
+	add_polynomial(&p, 5, 0);
+	add_polynomial(&p, -1, 2);
+	add_polynomial(&p, 4, 3);
+	add_polynomial(&p, 8, 6);
+	add_polynomial(&p, 2, 3);
+
+	Polynomial* p1 = create_polynomial();
+	add_polynomial(&p1, 3, 1);
+	add_polynomial(&p1, 5, 2);
+	add_polynomial(&p1, 4, 3);
+	add_polynomial(&p1, 1, 5);
+	add_polynomial(&p1, -2, 6);
+	add_polynomial(&p1, 7, 8);
+
+
+
+
+
+}
 void EX1() {
 	stack* s1;
 	stack* s2;
-	int i, length = 0, result;
-	char temp, symbo;
+	int i, length = 0, result = -1;
+	char temp;
 
 	char* str = (char*)malloc(sizeof(char) * 50);
 	s1 = (stack*)malloc(sizeof(stack));
@@ -88,7 +116,7 @@ void calculate(stack* s1, stack* s2, char c) {
 	char temp;
 	while (stack_is_empty(s2) == 0) {
 		stack_top(s2, &temp);
-		result = getPreorities(temp,c);
+		result = getPreorities(temp, c);
 		if (result) {
 			push(todo(s1, s2), s1);
 		}
@@ -97,7 +125,6 @@ void calculate(stack* s1, stack* s2, char c) {
 		}
 	}
 }
-
 // print the output
 char todo(stack* s1, stack* s2) {
 	char temp, temp1, temp2, temp3;
@@ -111,7 +138,6 @@ char todo(stack* s1, stack* s2) {
 	printf("%C%C%C=%C\n", temp1, temp2, temp, temp3);
 	return temp3;
 }
-
 // check who is bigger
 int getPreorities(char a, char b) {
 
@@ -140,14 +166,13 @@ int preoretyId(char c) {
 	default: return -1;
 	}
 }
-
+// get the nex ver  calculation
 char getChar() {
 	char c;
 	c = ASCIICode;
 	ASCIICode--;
 	return (char)c;
 }
-
 // 1 char  , 0 operator , -1 not a char
 int isNumOrOperator(char c) {
 
@@ -165,9 +190,4 @@ int isNumOrOperator(char c) {
 	}
 
 
-}
-
-void initStack(stack** st) {
-	(*st) = (stack*)malloc(sizeof(stack));
-	create_stack(*st);
 }

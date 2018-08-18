@@ -75,10 +75,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Polynomial.c" />
     <ClCompile Include="Program.c" />
     <ClCompile Include="Stack_point.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Polynomial.h" />
     <ClInclude Include="Stack_point.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
