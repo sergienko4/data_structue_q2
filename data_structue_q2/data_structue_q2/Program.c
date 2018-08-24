@@ -29,18 +29,19 @@ void EX2() {
 	Polynomial* p = create_polynomial();
 	Polynomial* p1 = create_polynomial();
 
-	add_polynomial(&p, 5, 42);
-	add_polynomial(&p, -1, 2);
-	add_polynomial(&p, 1, 100);
+	add_polynomial(&p, 5, 2);
 	add_polynomial(&p, 8, 6);
+	add_polynomial(&p, -8, 6);
+	add_polynomial(&p, -1, 2);
 
-	add_polynomial(&p1, 3, 1);
-	add_polynomial(&p1, 5, 2);
-	add_polynomial(&p1, -4, 3);
-	add_polynomial(&p1, 1, 5);
-	add_polynomial(&p1, -2, 6);
-	add_polynomial(&p1, 7, 8);
 
+	add_polynomial(&p, 5, 42);
+	add_polynomial(&p, 1, 100);
+	add_polynomial(&p, 3, 1);
+	add_polynomial(&p, -4, 3);
+	add_polynomial(&p, 1, 5);
+	add_polynomial(&p, 7, 8);
+	
 
 	print_polynomial(p);
 
