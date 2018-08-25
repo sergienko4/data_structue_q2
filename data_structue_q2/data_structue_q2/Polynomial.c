@@ -51,27 +51,6 @@ void add_polynomial(Polynomial** head, double base, unsigned int pow) {
 			else
 			{
 				while (temp->next != NULL) {
-
-					/*if (temp->pow == pow) {
-						if (temp->base + base != 0) {
-							temp->base += base;
-							return;
-						}
-						else {
-							prevT = temp->prev;
-							nextT = temp->next;
-
-							if (temp->prev != NULL) {
-								prevT->next = nextT;
-							}
-							if (nextT->prev != NULL) {
-								nextT->prev = prevT;
-							}
-							free(temp);
-							return;
-						}
-					}*/
-
 					if (temp->next->pow == pow && (temp->next->base + base != 0)) {
 						temp->next->base += base;
 						return;
@@ -96,13 +75,6 @@ void add_polynomial(Polynomial** head, double base, unsigned int pow) {
 				if (temp->pow < pow && temp->next == NULL) {
 					prevT = temp->prev;
 					linkChainNext(&temp, base, pow);
-					if (prevT != NULL) {
-						*head = prevT;
-					}
-					else {
-						*head = temp;
-
-					}
 				}
 			}
 		}
@@ -215,35 +187,10 @@ Polynomial* plus_polynomial(Polynomial* P1, Polynomial* P2)
 }
 Polynomial* minus_polynomial(Polynomial* P1, Polynomial* P2) {
 
-	Polynomial* list = create_polynomial();
-
-	while (P1 != NULL && P2 != NULL)
-	{
-		if (P1->pow == P2->pow) {
-			add_polynomial(&list, (P1->base - P2->base), P1->pow);
-		}
-		else {
-			add_polynomial(&list, P1->base, P1->pow);
-			add_polynomial(&list, (-P2->base), P2->pow);
-		}
-
-		P1 = P1->next;
-		P2 = P2->next;
-
-	}
-
-	while (P1 != NULL) {
-		add_polynomial(&list, P1->base, P1->pow);
-		P1 = P1->next;
-	}
-	while (P2 != NULL) {
-		add_polynomial(&list, (-P2->base), P2->pow);
-		P2 = P2->next;
-	}
+	Polynomial* list = multyplay_polynomial(P2, -1);
+	list = plus_polynomial(P1, list);
 
 	return list;
-
-
 }
 Polynomial* multyplay_polynomial(Polynomial* P1, int c) {
 	Polynomial* list = create_polynomial();
@@ -274,6 +221,7 @@ int get_Power_polynomial(Polynomial* head) {
 			head = head->next;
 		}
 	}
+	printf("The max power is: %d \n", head->pow);
 	return head->pow;
 }
 void reset_power_polynomial(Polynomial* head) {
@@ -283,45 +231,49 @@ void reset_power_polynomial(Polynomial* head) {
 		head->pow = 0;
 		remove_chain_memorry(head->next);
 		head->next = NULL;
+		free(head);
 	}
-
-
-
-
-
 }
-void print_polynomial(Polynomial* head) {
-
+void print_polynomial(Polynomial* head, char* msg) {
 	int counter = 0;
-	while (head->next != NULL)
+
+	if (head == NULL || head->base == 0 && head->pow == 0)
 	{
-		head = head->next;
+		printf("Zero (Empty Polynomial) \n");
 	}
+	else {
+		printf("The result for %sis: \n", msg);
 
+		while (head->next != NULL)
+		{
+			head = head->next;
+		}
 
-	while (head != NULL)
-	{
+		while (head != NULL)
+		{
+			if (head->base == 1 || head->base == -1) {
+				if (head->next == NULL) {
+					printf("x^%u ", head->pow);
+				}
+				else {
+					printf("+x^%u ", head->pow);
+				}
+			}
 
-		if (head->base == 1 || head->base == -1) {
-			if (head->next == NULL) {
-				printf("x^%u ", head->pow);
+			else if (head->base > 0) {
+				if (head->next == NULL)
+					printf("%.0lfx^%u ", head->base, head->pow);
+				else
+					printf("+%.0lfx^%u ", head->base, head->pow);
 			}
 			else {
-				printf("+x^%u ", head->pow);
+				printf("-x^%u ", head->pow);
+
 			}
+			head = head->prev;
 		}
-
-		else if (head->base > 0) {
-			printf("+%.0lfx^%u ", head->base, head->pow);
-
-		}
-		else {
-			printf("-x^%u ", head->pow);
-
-		}
-		head = head->prev;
+		printf("\n");
 	}
-
 }
 
 void remove_chain_memorry(Polynomial* head) {

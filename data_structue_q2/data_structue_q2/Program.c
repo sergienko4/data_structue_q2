@@ -34,44 +34,35 @@ void main() {
 			}
 		} while (all_Ex_in_loop && select);
 		return 0;
-		//EX1();
-		//EX2();
-
-
-
-
 }
 
 void EX2() {
 	int x = 0;
+	int base = 1, pow = 0;
 	Polynomial* newP = NULL;
-	Polynomial* p = create_polynomial();
-	Polynomial* p1 = create_polynomial();
+	Polynomial* p = createChain();
+	Polynomial* p1 = createChain();
 
-	add_polynomial(&p, 5, 2);
-	add_polynomial(&p, 8, 6);
-	add_polynomial(&p, -8, 6);
-	add_polynomial(&p, -1, 2);
+	print_polynomial(p, "P1:");
+	print_polynomial(p1, "P2:");
 
+	newP = plus_polynomial(p, p1);//ok
 
-	add_polynomial(&p, 5, 42);
-	add_polynomial(&p, 1, 100);
-	add_polynomial(&p, 3, 1);
-	add_polynomial(&p, -4, 3);
-	add_polynomial(&p, 1, 5);
-	add_polynomial(&p, 7, 8);
-	
+	print_polynomial(newP, "plus_polynomial");
+	remove_chain_memorry(newP);
 
-	print_polynomial(p);
-
-
-	newP = plus_polynomial(p, p1);
 	newP = minus_polynomial(p, p1);
-	newP = multyplay_polynomial(p, 0);
-	newP = create_polynomial();
-	x = get_Power_polynomial(newP);
-	reset_power_polynomial(p);
-	
+	print_polynomial(newP, "minus_polynomial");
+	remove_chain_memorry(newP);
+
+	newP = multyplay_polynomial(p, 5);//ok
+	print_polynomial(newP, "multyplay_polynomial");
+	remove_chain_memorry(newP);
+
+	x = get_Power_polynomial(p);//ok
+	printf("The biggeest pow is: %d", x);
+	reset_power_polynomial(p);//ok
+
 }
 void EX1() {
 	stack* s1;
@@ -85,11 +76,11 @@ void EX1() {
 
 	create_stack(s1);
 	create_stack(s2);
-	
+
 	printf("Enter the math fun to calculate\n");
 	flushall();
 	gets(str);
-	
+
 	length = strlen(str);
 
 	for (i = 0; i < length; i++) {
@@ -221,6 +212,25 @@ int isNumOrOperator(char c) {
 			return -1;
 		}
 	}
+}
 
+Polynomial* createChain() {
+	double base = -1;
+	unsigned int pow = 0;
+	Polynomial* p = NULL;
 
+	p = create_polynomial();
+
+	while (base != 0) {
+		printf("For exit enter 0 \n");
+		printf("Enter base \n");
+		scanf("%lf", &base);
+		if (base != 0) {
+			printf("Enter pow \n");
+			scanf("%u", &pow);
+			add_polynomial(&p, base, pow);
+		}
+	}
+
+	return p;
 }
