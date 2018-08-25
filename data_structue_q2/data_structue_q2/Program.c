@@ -43,8 +43,8 @@ void EX2() {
 	Polynomial* p = createChain();
 	Polynomial* p1 = createChain();
 
-	print_polynomial(p, "P1:");
-	print_polynomial(p1, "P2:");
+	print_polynomial(p, "P1");
+	print_polynomial(p1, "P2");
 
 	newP = plus_polynomial(p, p1);//ok
 
